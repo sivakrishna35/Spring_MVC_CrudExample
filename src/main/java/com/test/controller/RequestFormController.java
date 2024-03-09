@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.test.entity.Dto.RequestFormReqDto;
 import com.test.entity.Dto.RequestFormResDto;
 import com.test.service.RequestFormService;
+import com.test.util.GenericResponse;
 
 @RestController
 @RequestMapping("/request")
@@ -28,17 +29,18 @@ public class RequestFormController {
 	private RequestFormService requestFormService;
 	
 	@PostMapping("/save")
-	public ResponseEntity<String> saveRequestForm(@RequestBody RequestFormReqDto requestFormReqDto){
-		return new ResponseEntity<>(requestFormService.saveRequestForm(requestFormReqDto), HttpStatus.CREATED);
+	public ResponseEntity<GenericResponse<String>> saveRequestForm(@RequestBody RequestFormReqDto requestFormReqDto){
+		GenericResponse<String> response = requestFormService.saveRequestForm(requestFormReqDto);
+		return new ResponseEntity<>(response, HttpStatus.CREATED);
 	}
 	
 	@GetMapping("/get-by-id/{custId}")
-	public ResponseEntity<RequestFormResDto> getByFormId(@PathVariable("custId") Integer custId){
+	public ResponseEntity<GenericResponse<RequestFormResDto>> getByFormId(@PathVariable("custId") Integer custId){
 		return new ResponseEntity<>(requestFormService.getByFormId(custId),HttpStatus.OK);
 	}
 	
 	@GetMapping("/get-by-id")
-	public ResponseEntity<RequestFormResDto> getByFormIdUsingQueryParam(@PathParam("custId") Integer custId){
+	public ResponseEntity<GenericResponse<RequestFormResDto>> getByFormIdUsingQueryParam(@PathParam("custId") Integer custId){
 		return new ResponseEntity<>(requestFormService.getByFormId(custId),HttpStatus.OK);
 	}
 	

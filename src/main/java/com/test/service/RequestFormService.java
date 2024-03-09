@@ -4,12 +4,13 @@ import java.util.List;
 
 import com.test.entity.Dto.RequestFormReqDto;
 import com.test.entity.Dto.RequestFormResDto;
+import com.test.util.GenericResponse;
 
 public interface RequestFormService {
 
-	String saveRequestForm(RequestFormReqDto requestFormReqDto);
+	GenericResponse<String> saveRequestForm(RequestFormReqDto requestFormReqDto);
 
-	RequestFormResDto getByFormId(Integer custId);
+	GenericResponse<RequestFormResDto> getByFormId(Integer custId);
 
 	List<RequestFormResDto> getAllRecords();
 
